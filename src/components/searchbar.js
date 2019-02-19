@@ -24,11 +24,6 @@ export default class SearchBar extends Component {
         "regional",
         "brewpub"
       ],
-      typesDisplayed: {
-        micro: true,
-        regional: true,
-        brewpub: true
-      },
 			regions: [
 			"Alabama",
 			"Alaska",
@@ -145,14 +140,7 @@ export default class SearchBar extends Component {
 
   //filters to only include specific brewery type
   handleFilterChange(filterTarget){
-    let filterObj = {
-      [filterTarget]: !this.state.typesDisplayed[filterTarget]
-    }
-
-    this.setState({
-      ...this.state, 
-      typesDisplayed: {...this.state.typesDisplayed, ...filterObj}
-    })
+    this.props.handleFilterChange(filterTarget)
   }
 
   render() {
@@ -189,7 +177,7 @@ export default class SearchBar extends Component {
     return (
       <Container className="search-bar">
         <h1>SearchBar</h1>
-        <TypesFilter typesDisplayed={this.state.typesDisplayed} handleFilterChange={filterTarget => this.handleFilterChange(filterTarget)} />
+        <TypesFilter typesDisplayed={this.props.typesDisplayed} handleFilterChange={filterTarget => this.handleFilterChange(filterTarget)} />
         <form onSubmit={(e)=>{this.handleSearch(e)}}>
           
           <Button onClick={()=>{this.showMoreResults()}}>Show More</Button>
