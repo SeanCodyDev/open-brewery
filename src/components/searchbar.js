@@ -5,6 +5,8 @@ import './searchbar.css';
 
 import {Button, Container} from 'react-bootstrap'
 
+import TypesFilter from './typesfilter';
+
 
 export default class SearchBar extends Component {
 
@@ -117,10 +119,6 @@ export default class SearchBar extends Component {
       }, () => this.fetchStateResults(this.state.searchRegion))
   }
 
-  //filters to only include specific brewery type
-  showMicro(type) {
-    console.log('type should be micro:', type)
-  } 
 
   //sets searchTerm controlled variable
   onChange(searchTerm){
@@ -144,6 +142,18 @@ export default class SearchBar extends Component {
             console.log(err);
         });
 	}
+
+  //filters to only include specific brewery type
+  handleFilterChange(filterTarget){
+    let filterObj = {
+      [filterTarget]: !this.state.typesDisplayed[filterTarget]
+    }
+
+    this.setState({
+      ...this.state, 
+      typesDisplayed: {...this.state.typesDisplayed, ...filterObj}
+    })
+  }
 
   render() {
 
@@ -175,11 +185,13 @@ export default class SearchBar extends Component {
       menuButton = <Button onClick={()=>{this.showButtons()}}>Show Menu</Button>
     }
 
+
     return (
       <Container className="search-bar">
         <h1>SearchBar</h1>
+        <TypesFilter typesDisplayed={this.state.typesDisplayed} handleFilterChange={filterTarget => this.handleFilterChange(filterTarget)} />
         <form onSubmit={(e)=>{this.handleSearch(e)}}>
-          <Button onClick={(e)=>{this.showMicro(e.target.value)}} value="micro">Show Micro</Button>
+          
           <Button onClick={()=>{this.showMoreResults()}}>Show More</Button>
           {menuButton}
 	        
