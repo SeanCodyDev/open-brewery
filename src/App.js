@@ -18,6 +18,7 @@ export default class App extends Component {
 		}
 	}
 
+	//loads api fetch results into state
 	updateResults(results){
 		this.setState({
 			results
