@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 
 
-import SearchBar from './components/searchbar';
+import SearchSection from './components/searchsection';
 import Results from './components/results';
+import HeaderBar from './components/headerbar'
 
 export default class App extends Component {
 	constructor(props){
@@ -50,14 +51,15 @@ export default class App extends Component {
 
 		return (
 			<div className="App">
-			<SearchBar 
+			<HeaderBar />
+			<SearchSection 
 				results={this.state.results} 
 				updateResults={(results)=>this.updateResults(results)}
-				handleFilterChange={filterTarget => this.handleFilterChange(filterTarget)}
-				typesDisplayed={this.state.typesDisplayed}
 				/>
 			<Results 
 				results={filteredResults}
+				typesDisplayed={this.state.typesDisplayed}
+				handleFilterChange={filterTarget => this.handleFilterChange(filterTarget)}
 			/>
 			</div>
 			);

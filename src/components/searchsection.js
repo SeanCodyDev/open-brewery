@@ -9,16 +9,14 @@ import TypesFilter from './typesfilter';
 
 import regions from '../regions';
 
-export default class SearchBar extends Component {
+export default class SearchSection extends Component {
 
-  //can these states be imported from a separate file?
 	constructor(props){
 		super(props);
 		this.state = {
       searchTerm: "",
       searchRegion: "",
       showButtons: true,
-      //initial: 20
       resultCount: 20,
       types: [
         "micro",
@@ -29,16 +27,8 @@ export default class SearchBar extends Component {
 		}
 	}
 
-  //stub only - no current functionality
-  handleSearch(e){
-    e.preventDefault();
-    console.log('target value', e.target.value)
-  }
-
   //this function uses a setState callback to fetch results
 	handleSubmit(region){
-    console.log("handleSubmit region:", region)
-
     this.setState({
       searchRegion: region.region
     }, () => this.fetchStateResults(this.state.searchRegion))
@@ -58,25 +48,21 @@ export default class SearchBar extends Component {
 
   //this function uses a setState callback to fetch more results
   showMoreResults(){
-    
       let resultCount = this.state.resultCount + 10;
       this.setState({
         ...this.state, resultCount: resultCount
       }, () => this.fetchStateResults(this.state.searchRegion))
   }
 
-
   //sets searchTerm controlled variable
-  onChange(searchTerm){
-    console.log(searchTerm);
+  setSearchTerm(searchTerm){
     this.setState(
       {searchTerm})
   }
 
+  //MOVE THIS TO ANOTHER FILE AND IMPORT???
   //fetch API to get call state brewery API
-  //uses promise to 
 	fetchStateResults(region){
-    console.log('fetching:', this.state.searchRegion)
     let url = `${API_BASE_URL}?by_state=${this.state.searchRegion}&per_page=${this.state.resultCount}`;
 		return fetch(url)
         .then(res => res.json())
@@ -127,9 +113,7 @@ export default class SearchBar extends Component {
 
     return (
       <Container className="search-bar">
-        <h1>SearchBar</h1>
-        <TypesFilter typesDisplayed={this.props.typesDisplayed} handleFilterChange={filterTarget => this.handleFilterChange(filterTarget)} />
-        <form onSubmit={(e)=>{this.handleSearch(e)}}>
+        <form>
           
           <Button onClick={()=>{this.showMoreResults()}}>Show More</Button>
           {menuButton}
@@ -141,7 +125,7 @@ export default class SearchBar extends Component {
             id="search"
             name="search"
             placeholder="Indiana"
-            onChange={e => this.onChange(e.target.value)} />
+            onChange={e => this.setSearchTerm(e.target.value)} />
             <ul className="search-button-list">
               {buttons}
             </ul>
