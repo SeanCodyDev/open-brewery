@@ -22,6 +22,11 @@ export default class SearchBar extends Component {
         "regional",
         "brewpub"
       ],
+      typesDisplayed: {
+        micro: true,
+        regional: true,
+        brewpub: true
+      },
 			regions: [
 			"Alabama",
 			"Alaska",
