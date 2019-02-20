@@ -1,2 +1,29 @@
 .results {
 }
+
+.results-nav {
+	margin-bottom: 20px;
+}
+
+.show-more-button {
+	min-width: 160px;
+	margin: 10px;
+	/*Indiana Pacer color theme*/
+	background-color: #FDBB30;
+	color: #041E42;
+	border: none;
+	font-weight: bold;
+	font-size: 18px;
+	transition: background-color 0.5s;
+	transition: color 0.5s;
+}
+
+.show-more-button:hover {
+	background-color: #041E42;
+	color: #FDBB30;
+}
+
+.result-card {
+	margin-bottom: 20px!important;
+	min-height: 200px;
+}

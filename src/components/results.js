@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ResultsCard from './resultcard';
 import TypesFilter from './typesfilter';
-import {Button} from 'react-bootstrap';
+import {Container, Button, CardDeck} from 'react-bootstrap';
 
 import './results.css';
 
@@ -35,17 +35,19 @@ export default class Results extends Component {
     let resultsNav;
     if (this.props.results.length > 0){
       resultsNav = 
-      <div>
+      <div className="results-nav">
         <TypesFilter typesDisplayed={this.props.typesDisplayed} handleFilterChange={filterTarget => this.handleFilterChange(filterTarget)} />
-        <Button onClick={()=>{this.showMoreResults()}}>Show More</Button>
+        <Button className="show-more-button" onClick={()=>{this.showMoreResults()}}>Show More</Button>
       </div>
     }
 
     return (
-      <div className="results">
+      <Container className="results">
         {resultsNav}
-        {results}
-      </div>
+        <CardDeck className="justify-content-around">
+          {results}
+        </CardDeck>
+      </Container>
     );
   }
 }
