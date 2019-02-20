@@ -1,0 +1,45 @@
+.search-bar {
+	background-color: #E0E0E0;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.state-button-list-item {
+	list-style: none;
+	display: inline;
+}
+
+.state-button, .menu-button {
+	min-width: 160px;
+	margin: 10px;
+	/*Indiana Pacer color theme*/
+	background-color: #FDBB30;
+	color: #041E42;
+	border: none;
+	font-weight: bold;
+	font-size: 18px;
+	transition: background-color 0.5s;
+	transition: color 0.5s;
+}
+
+.state-button:hover, .menu-button:hover {
+	background-color: #041E42;
+	color: #FDBB30;
+}
+
+.search-form {
+	padding-top: 20px;
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+}
+
+.search-input {
+	width: 30%;
+	margin: auto;
+	margin-bottom: 10px;
+	min-width: 240px; 
+}
+
+.search-button-list {
+	padding-left: 0;
+}

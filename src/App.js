@@ -6,6 +6,12 @@ import SearchSection from './components/searchsection';
 import Results from './components/results';
 import HeaderBar from './components/headerbar'
 
+import regions from './regions';
+
+import {API_BASE_URL} from './config'
+
+
+
 export default class App extends Component {
 	constructor(props){
 		super(props);
@@ -15,8 +21,32 @@ export default class App extends Component {
 				micro: true,
 				regional: true,
 				brewpub: true
-			}
+			},
+			searchTerm: "",
+			searchRegion: "",
+			resultCount: 20,
+			types: [
+			"micro",
+			"regional",
+			"brewpub"
+			],
+			regions: regions
 		}
+	}
+
+
+	 //fetch API to get call state brewery API
+	fetchStateResults(region){
+    let url = `${API_BASE_URL}?by_state=${this.state.searchRegion}&per_page=${this.state.resultCount}`;
+		return fetch(url)
+        .then(res => res.json())
+        .then(body => {
+            console.log(body)
+            this.updateResults(body);
+            })
+        .catch(err => {
+            console.log(err);
+        });
 	}
 
 	//loads api fetch results into state
@@ -38,6 +68,30 @@ export default class App extends Component {
 		})
 	}
 
+	//sets searchTerm controlled variable
+	setSearchTerm(searchTerm){
+	  	this.setState(
+	  		{searchTerm})
+	}
+
+    //this function uses a setState callback to fetch more results
+    showMoreResults(){
+        let resultCount = this.state.resultCount + 10;
+        this.setState({
+          ...this.state, resultCount: resultCount
+        }, () => this.fetchStateResults(this.state.searchRegion))
+    }
+
+    //this function uses a setState callback to fetch results
+	handleSubmit(region){
+		console.log(region)
+      this.setState({
+        searchRegion: region.region
+      }, () => this.fetchStateResults(this.state.searchRegion))
+
+	}
+
+
 	render() {
 
 
@@ -52,14 +106,20 @@ export default class App extends Component {
 		return (
 			<div className="App">
 			<HeaderBar />
-			<SearchSection 
+			<SearchSection
+				regions={this.state.regions}
+				searchTerm={this.state.searchTerm}
 				results={this.state.results} 
 				updateResults={(results)=>this.updateResults(results)}
+				fetchStateResults={(region)=>this.fetchStateResults(region)}
+				setSearchTerm={(searchTerm)=>this.setSearchTerm(searchTerm)}
+				handleSubmit={(region)=>this.handleSubmit(region)}
 				/>
 			<Results 
 				results={filteredResults}
 				typesDisplayed={this.state.typesDisplayed}
 				handleFilterChange={filterTarget => this.handleFilterChange(filterTarget)}
+				showMoreResults={()=>this.showMoreResults()}
 			/>
 			</div>
 			);

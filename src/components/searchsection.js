@@ -1,90 +1,45 @@
 import React, { Component } from 'react';
 import {API_BASE_URL} from '../config'
 
-import './searchbar.css';
+import './searchsection.css';
 
-import {Button, Container} from 'react-bootstrap'
+import {Button, Container, Form, FormControl} from 'react-bootstrap'
 
 import TypesFilter from './typesfilter';
-
-import regions from '../regions';
 
 export default class SearchSection extends Component {
 
 	constructor(props){
 		super(props);
 		this.state = {
-      searchTerm: "",
-      searchRegion: "",
       showButtons: true,
-      resultCount: 20,
-      types: [
-        "micro",
-        "regional",
-        "brewpub"
-      ],
-			regions: regions
 		}
 	}
 
   //this function uses a setState callback to fetch results
 	handleSubmit(region){
-    this.setState({
-      searchRegion: region.region
-    }, () => this.fetchStateResults(this.state.searchRegion))
+    this.props.handleSubmit(region)
 
     this.hideButtons();
 	}
-
-  hideButtons(){
-    this.setState(
-      {showButtons: false})
-  }
 
   showButtons(){
     this.setState(
       {showButtons: true})
   }
 
-  //this function uses a setState callback to fetch more results
-  showMoreResults(){
-      let resultCount = this.state.resultCount + 10;
-      this.setState({
-        ...this.state, resultCount: resultCount
-      }, () => this.fetchStateResults(this.state.searchRegion))
-  }
-
-  //sets searchTerm controlled variable
-  setSearchTerm(searchTerm){
+  hideButtons(){
     this.setState(
-      {searchTerm})
+      {showButtons: false})
   }
 
-  //MOVE THIS TO ANOTHER FILE AND IMPORT???
-  //fetch API to get call state brewery API
-	fetchStateResults(region){
-    let url = `${API_BASE_URL}?by_state=${this.state.searchRegion}&per_page=${this.state.resultCount}`;
-		return fetch(url)
-        .then(res => res.json())
-        .then(body => {
-            console.log(body)
-            this.props.updateResults(body);
-            })
-        .catch(err => {
-            console.log(err);
-        });
-	}
 
-  //filters to only include specific brewery type
-  handleFilterChange(filterTarget){
-    this.props.handleFilterChange(filterTarget)
-  }
 
   render() {
 
     //filter buttons based on the searchTerm
-    let filteredRegions = this.state.regions.filter(region => {
-      return region.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+    let filteredRegions = this.props.regions.filter(region => {
+      return region.toLowerCase().includes(this.props.searchTerm.toLowerCase())
     });
 
     //hide buttons if state.showButtons is false
@@ -105,31 +60,29 @@ export default class SearchSection extends Component {
     if (this.props.results.length < 1) {
       menuButton = null;
     } else if (this.state.showButtons === true) {
-      menuButton = <Button onClick={()=>{this.hideButtons()}}>Hide Menu</Button>
+      menuButton = <Button className="menu-button" onClick={()=>{this.hideButtons()}}>Hide Menu</Button>
     } else if(this.state.showButtons === false) {
-      menuButton = <Button onClick={()=>{this.showButtons()}}>Show Menu</Button>
+      menuButton = <Button className="menu-button" onClick={()=>{this.showButtons()}}>Show Menu</Button>
     }
 
 
     return (
       <Container className="search-bar">
-        <form>
+        <Form className="search-form">
           
-          <Button onClick={()=>{this.showMoreResults()}}>Show More</Button>
           {menuButton}
 	        
-          <button type="submit">Search</button>
-
-          <input 
-            type="search"
+          <FormControl 
+            type="text"
             id="search"
+            className="search-input"
             name="search"
-            placeholder="Indiana"
-            onChange={e => this.setSearchTerm(e.target.value)} />
+            placeholder="Search"
+            onChange={e => this.props.setSearchTerm(e.target.value)} />
             <ul className="search-button-list">
               {buttons}
             </ul>
-        </form>
+        </Form>
       </Container>
     );
   }
