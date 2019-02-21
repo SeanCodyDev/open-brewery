@@ -13,13 +13,6 @@ export default class Results extends Component {
     this.props.handleFilterChange(filterTarget)
   }
 
-  //this function uses a setState callback to fetch more results
-  showMoreResults(){
-    let resultCount = this.state.resultCount + 10;
-    this.setState({
-      ...this.state, resultCount: resultCount
-    }, () => this.fetchStateResults(this.state.searchRegion))
-  }
   
   render() {
 
@@ -37,7 +30,7 @@ export default class Results extends Component {
       resultsNav = 
       <div className="results-nav">
         <TypesFilter typesDisplayed={this.props.typesDisplayed} handleFilterChange={filterTarget => this.handleFilterChange(filterTarget)} />
-        <Button className="show-more-button" onClick={()=>{this.showMoreResults()}}>Show More</Button>
+        <Button className="show-more-button" onClick={()=>{this.props.showMoreResults()}}>Show More</Button>
       </div>
     }
 
