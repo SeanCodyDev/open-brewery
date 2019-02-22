@@ -37,7 +37,7 @@ export default class Results extends Component {
     return (
       <Container className="results">
         {resultsNav}
-        <CardDeck className="justify-content-around">
+        <CardDeck className="justify-content-around card-deck-custom">
           {results}
         </CardDeck>
       </Container>

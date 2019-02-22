@@ -27,3 +27,14 @@
 	margin-bottom: 20px!important;
 	min-height: 200px;
 }
+
+.results-card-header {
+	font-size: 1.2em;
+	background-color: #041E42;
+	color: #FDBB30;
+	font-weight: bold;
+}
+
+.card-deck-custom {
+	flex-flow: row wrap;
+}

@@ -8,7 +8,7 @@ export default function TypesFilter(props){
 
 		<div>
 			<form className="types-filter-form">
-				<label>
+				<label className="toggle-label">
 					<span className="switch-label">Micro</span>
 					<Switch 
 						className="react-switch" 
@@ -18,7 +18,7 @@ export default function TypesFilter(props){
 						onColor="#FDBB30"
 						offColor="#041E42" />
 				</label>
-				<label>
+				<label className="toggle-label">
 					<span className="switch-label">Brewpub</span>
 					<Switch 
 						className="react-switch" 
@@ -28,7 +28,7 @@ export default function TypesFilter(props){
 						onColor="#FDBB30"
 						offColor="#041E42" />
 				</label>
-				<label>
+				<label className="toggle-label">
 					<span className="switch-label">Regional</span>
 					<Switch 
 						className="react-switch" 

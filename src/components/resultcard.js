@@ -11,11 +11,12 @@ export default class ResultCard extends Component {
 
     return (
       <Card style={{ width: '18rem', textAlign: 'left' }} className="result-card">
-        <Card.Body>
-          <Card.Title>{this.props.result.name}</Card.Title>
+       <Card.Header className="results-card-header">{this.props.result.name}</Card.Header>
+       <Card.Body>
+          
           <Card.Subtitle className="mb-2 text-muted">{this.props.result.city}</Card.Subtitle>
           <Card.Text>
-            {this.props.result.brewery_type}
+            Brewery Type: {this.props.result.brewery_type}
           </Card.Text>
           <Card.Link href={webUrl} target="_blank">Website</Card.Link>
         </Card.Body>
