@@ -1,0 +1,13 @@
+.jumbotron {
+	color: #041E42;
+}
+
+.jumbotron h1{
+	font-weight: bold;
+}
+
+@media (min-width: 576px) {
+	.jumbotron {
+	    margin: 2rem;
+	}
+}
