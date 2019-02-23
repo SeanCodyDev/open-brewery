@@ -1,6 +1,6 @@
 ## Open Brewery
 
-Live Demo [Open Brewery]()
+Live Demo [Open Brewery](https://open-brewery.herokuapp.com/)
 
 
 ## Summary
