@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ResultsCard from './resultcard';
 import TypesFilter from './typesfilter';
 import {Container, Button, CardDeck} from 'react-bootstrap';
+import Loader from './loader'
 
 import './results.css';
 
@@ -15,6 +16,11 @@ export default class Results extends Component {
 
   
   render() {
+    let loading;
+    if (this.props.loading) {
+      loading = <Loader />
+      
+    }
 
   	let results = this.props.results.map((result, index) => {
   		return (
@@ -37,6 +43,7 @@ export default class Results extends Component {
     return (
       <Container className="results">
         {resultsNav}
+        {loading}
         <CardDeck className="justify-content-around card-deck-custom">
           {results}
         </CardDeck>

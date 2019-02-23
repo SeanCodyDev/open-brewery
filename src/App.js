@@ -25,6 +25,7 @@ export default class App extends Component {
 			},
 			searchTerm: "",
 			searchRegion: "",
+			loading: false,
 			resultCount: 20,
 			types: [
 			"micro",
@@ -44,6 +45,7 @@ export default class App extends Component {
         .then(body => {
             console.log(body)
             this.updateResults(body);
+            this.setState({loading: false})
             })
         .catch(err => {
             console.log(err);
@@ -79,7 +81,8 @@ export default class App extends Component {
     showMoreResults(){
         let resultCount = this.state.resultCount + 10;
         this.setState({
-          ...this.state, resultCount: resultCount
+          resultCount: resultCount,
+          loading: true
         }, () => this.fetchStateResults(this.state.searchRegion))
     }
 
@@ -87,7 +90,8 @@ export default class App extends Component {
 	handleSubmit(region){
 		console.log(region)
       this.setState({
-        searchRegion: region.region
+        searchRegion: region.region,
+        loading: true
       }, () => this.fetchStateResults(this.state.searchRegion))
 
 	}
@@ -130,6 +134,7 @@ export default class App extends Component {
 				typesDisplayed={this.state.typesDisplayed}
 				handleFilterChange={filterTarget => this.handleFilterChange(filterTarget)}
 				showMoreResults={()=>this.showMoreResults()}
+				loading={this.state.loading}
 			/>
 			</div>
 			);
