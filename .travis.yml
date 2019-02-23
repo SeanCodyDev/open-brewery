@@ -2,6 +2,13 @@ language: node_js
 node_js: node
 cache:
   directories:
-    - node_modules
+  - node_modules
 env:
-  - CI=true
+- CI=true
+deploy:
+  provider: heroku
+  api_key:
+    secure: HHzc3koOfQJEamyUuhIL9y5zfrufbubljIshFQkPk6sSUjGPbTJ8vP0qd6/53NmpMji3HpMXGP601R1I+gS56eYNvCxiprnxw/P1okOTD0pd1/SRXX88nva/MzWHkpu3dZJar8IfSJdA8X1ET+O2eBhzVmIgJpIlkCq2Nkh9Hc9zLAv6XNpybfxPWDfmnyQgT2duq/UQD6W++ER31fEWtibFMlX4631arjQnjn7iNAPQE3VmUIaLBrdE0hgGP1LVyB7K6o6jOzF0vIgPtCpjeYqBc8OlqkWBWK2QNPKG3aE3uUfMMiBfQqO8bQVoMa6k+srYFa06jvYBUeJzrF1FHaIM3kPYxrQ0Hd+708yONPP3V+rfhJUEQAY9xqty8rONcqm+NFCd5cxjyHJIa3nu1lFbAUb71I2OjRuXZpWfggkvJJsq7TRhTMoiBR0pABYKsVmH+IqXT5C9nyQiObMFo3+S7cBiC7jCPZckeXPqg0AbXGb+yCT7Y2VJv6hBPfhpKwGyGftqJ+23j9fI4j5AWPb91pH6x+afjCupsGjalsy9Lt98N4Ifpv64hk/u7W2EVFpcKq/KBtyRn1GF6g1DDJOjG9Y9rgXSdkxa+CB4mP3TKot63NAQYUElvP/+xUc/LVhV3rCtJbIjms8G5Grrv+cRXe33jZedRc5v0qPD1nw=
+  app: hidden-dawn-78020
+  on:
+    repo: SeanCodyDev/open-brewery
