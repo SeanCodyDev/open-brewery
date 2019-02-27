@@ -17,7 +17,7 @@ export default class Results extends Component {
   
   render() {
     let loading;
-    if (this.props.loading) {
+    if (this.props) {
       loading = <Loader />
       
     }

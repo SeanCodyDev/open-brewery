@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import {API_BASE_URL} from '../config'
 
 import './searchsection.css';
 
 import {Button, Container, Form, FormControl} from 'react-bootstrap'
-
-import TypesFilter from './typesfilter';
 
 export default class SearchSection extends Component {
 
