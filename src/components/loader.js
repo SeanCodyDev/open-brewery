@@ -22,7 +22,7 @@ export default class Loader extends React.Component {
         centered
       >
         <Modal.Body>
-          <div className='sweet-loading'>
+          <div className='sweet-loading' style={{display: 'flex'}}>
             <BeatLoader
               css={override}
               sizeUnit={"px"}
