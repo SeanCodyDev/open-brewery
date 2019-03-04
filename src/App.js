@@ -27,11 +27,6 @@ export default class App extends Component {
 			searchRegion: "",
 			loading: false,
 			resultCount: 20,
-			types: [
-			"micro",
-			"regional",
-			"brewpub"
-			],
 			regions: regions
 		}
 	}

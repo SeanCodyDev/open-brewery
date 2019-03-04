@@ -14,23 +14,13 @@ export default class ResultCard extends Component {
        <Card.Header className="results-card-header">{this.props.result.name}</Card.Header>
        <Card.Body>
           
-          <Card.Subtitle className="mb-2 text-muted">{this.props.result.city}</Card.Subtitle>
-          <Card.Text>
+          <Card.Subtitle className="mb-2 text-muted results-city-header">{this.props.result.city}</Card.Subtitle>
+          <Card.Text className='results-brewery-type'>
             Brewery Type: {this.props.result.brewery_type}
           </Card.Text>
-          <Card.Link href={webUrl} target="_blank">Website</Card.Link>
+          <Card.Link className='results-url' href={webUrl} target="_blank">Website</Card.Link>
         </Card.Body>
       </Card>
     );
   }
 }
-
-    // return (
-    //   <div className="result-card">
-    //     <ul>
-    //       <li>{this.props.result.name}</li>
-    //       <li>{this.props.result.city}</li>
-    //       <li>{this.props.result.brewery_type}</li>
-    //     </ul>
-    //   </div>
-    // );
